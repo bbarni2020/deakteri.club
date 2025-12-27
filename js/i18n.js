@@ -1,9 +1,11 @@
 const translations = {
     en: {
+        "website-title": "Welcome To The Deak Teri HC Guides",
         "other-resources-title": "Other Resources",
         "other-resources-intro": "Here you can find additional links to help you on your journey with Hack Club."
     },
     hu: {
+        "website-title": "Üdvözlünk a Deák Téri Hack Club Guide Oldalán",
         "other-resources-title": "Egyéb Források",
         "other-resources-intro": "Itt további linkeket találsz, amelyek segítenek az utadon a Hack Clubbal."
     }
@@ -24,20 +26,15 @@ function setLanguage(lang) {
     if (currentLangSpan) {
         currentLangSpan.textContent = lang.toUpperCase();
     }
-}
 
-function toggleLanguage() {
-    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-    const newLang = currentLang === 'en' ? 'hu' : 'en';
-    setLanguage(newLang);
+    document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+    const activeBtn = document.getElementById(`lang-${lang}`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('preferredLanguage') || 'en';
     setLanguage(savedLang);
-
-    const toggleBtn = document.getElementById('lang-toggle-btn');
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', toggleLanguage);
-    }
 });

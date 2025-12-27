@@ -25,58 +25,86 @@ a {
     color: inherit;
 }
 
-header {
-    background-color: #fff;
-    padding: 1rem 2rem;
+.lang-toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
     z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-strong);
-}
-
-.lang-toggle {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+.lang-option {
     cursor: pointer;
-    border: 1px solid #ccc;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    background: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-option.active {
+    box-shadow: 0 0 15px #fff, 0 0 5px #fff inset;
+    transform: scale(1.1);
 }
 
 .flag-icon {
-    width: 24px;
-    height: 16px;
-    display: inline-block;
-    border: 1px solid #eee;
+    width: 30px;
+    height: 20px;
+    display: block;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .flag-en {
-    /*TODO: implement flag background*/
+    background: 
+        linear-gradient(90deg, #3c3b6e 40%, transparent 40%),
+        repeating-linear-gradient(180deg, #b22234 0, #b22234 10%, #fff 10%, #fff 20%);
 }
 
 .flag-hu {
     background: linear-gradient(to bottom, #ce2939 33%, #fff 33%, #fff 66%, #477050 66%);
 }
 
+
+.welcome-screen {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--color-strong);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.glassy-text {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    letter-spacing: 2px;
+    max-width: 800px;
+}
+
 .hero {
     text-align: center;
     padding: 3rem 1rem;
+    background-color: var(--bg-color);
 }
 
 .hero h1 {
     margin-bottom: 2rem;
     font-size: 2.5rem;
+    display: none;
 }
 
 .tile-grid {
@@ -98,12 +126,13 @@ header {
     color: #fff;
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
+    background-color: var(--color-medium);
     height: 250px;
 }
 
 .tile:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .tile i {
@@ -113,9 +142,21 @@ header {
 
 .tile h2 {
     font-size: 1.5rem;
+    font-weight: 600;
 }
 
-.tile:nth-child(1), .tile:nth-child(4) { background-color: var(--color-light); color: #333; }
+.tile:nth-child(1) { background-color: #ec3750; }
+.tile:nth-child(2) { background-color: #4a154b; }
+.tile:nth-child(3) { background-color: #e42d42; }
+.tile:nth-child(4) { background-color: #2cb67d; }
+.tile:nth-child(5) { background-color: #24292e; }
+.tile:nth-child(6) { background-color: #007bff; }
+
+@media (max-width: 768px) {
+    .glassy-text {
+        font-size: 2.5rem;
+    }
+}
 .tile:nth-child(2), .tile:nth-child(5) { background-color: var(--color-medium); }
 .tile:nth-child(3), .tile:nth-child(6) { background-color: var(--color-strong); }
 

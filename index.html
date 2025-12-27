@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">HC Guides</div>
-        <div class="lang-toggle" id="lang-toggle-btn">
+    <div class="lang-toggle-container">
+        <div class="lang-option" id="lang-en" onclick="setLanguage('en')">
             <span class="flag-icon flag-en"></span>
-            <span class="flag-icon flag-hu"></span>
-            <span id="current-lang">EN</span>
         </div>
-    </header>
+        <div class="lang-option" id="lang-hu" onclick="setLanguage('hu')">
+            <span class="flag-icon flag-hu"></span>
+        </div>
+    </div>
+
+    <section class="welcome-screen">
+        <h1 class="glassy-text" data-i18n="website-title">Welcome to the Deak Teri HC Guides</h1>
+    </section>
 
     <main class="hero">
-        <h1>Welcome to the Club Guides</h1>
         <div class="tile-grid">
             <a href="guides/hack-club.html" class="tile">
                 <i class="fa-solid fa-users"></i>
