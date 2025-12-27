@@ -56,21 +56,10 @@ a {
 }
 
 .flag-icon {
-    width: 30px;
-    height: 20px;
-    display: block;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-}
-
-.flag-en {
-    background: 
-        linear-gradient(90deg, #3c3b6e 40%, transparent 40%),
-        repeating-linear-gradient(180deg, #b22234 0, #b22234 10%, #fff 10%, #fff 20%);
-}
-
-.flag-hu {
-    background: linear-gradient(to bottom, #ce2939 33%, #fff 33%, #fff 66%, #477050 66%);
+    font-size: 1.5rem;
+    line-height: 1;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 
@@ -129,7 +118,38 @@ a {
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
     background-color: #ffffff;
-    height: 250px;
+    aspect-ratio: 1 / 1;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tile:nth-child(1) {
+    background-color: #ffffff;
+    color: var(--color-strong);
+}
+
+.tile:nth-child(2) {
+    background-color: #f9e6e6;
+    color: #5e1b1b;
+}
+
+.tile:nth-child(3) {
+    background-color: var(--color-light);
+    color: #4a1515;
+}
+
+.tile:nth-child(4) {
+    background-color: #eecbcb;
+    color: #360f0f;
+}
+
+.tile:nth-child(5) {
+    background-color: #e6b3b3;
+    color: #220a0a;
+}
+
+.tile:nth-child(6) {
+    background-color: #df9f9f;
+    color: #000000;
 }
 
 .tile:hover {
