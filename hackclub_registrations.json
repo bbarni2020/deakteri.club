@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-09-02T21:20:15.870654",
+    "name": "Balogh Barnabás",
+    "email": "balogh.barnabas2008@gmail.com",
+    "class": "10b",
+    "age": 17,
+    "interests": [
+      "coding",
+      "3d"
+    ],
+    "readable_interests": [
+      "Kódolás (webek, appok, játékok)",
+      "3D Design (Autodesk Fusion)"
+    ],
+    "admin_email_sent": true,
+    "student_email_sent": true,
+    "status": "registered"
+  },
+  {
+    "id": 2,
+    "timestamp": "2025-09-02T21:23:59.827610",
+    "name": "Balogh",
+    "email": "balogh.barnabas2008@gmail.com",
+    "class": "12a",
+    "age": 17,
+    "interests": [
+      "3d",
+      "content"
+    ],
+    "readable_interests": [
+      "3D Design (Autodesk Fusion)",
+      "Content Creation (videók, social media)"
+    ],
+    "admin_email_sent": true,
+    "student_email_sent": true,
+    "status": "registered"
+  }
+]

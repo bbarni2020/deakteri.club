@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Nem található | Deák Téri Hack Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://deakteri.club/style.css">
+    <link rel="shortcut icon" href="https://deakteri.club/icon.ico" type="image/x-icon">
+    <script src="https://deakteri.club/translations.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Deák Téri Hack Club</h1>
+                <span>Evangélikus Gimnázium</span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html" data-i18n="nav.about">Rólunk</a>
+                <a href="/index.html#members" data-i18n="nav.members">Tagjaink</a>
+                <a href="/index.html#activities" data-i18n="nav.activities">Tevékenységeink</a>
+                <a href="/index.html#donate" data-i18n="nav.donate">Támogatás</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="hero" role="main" aria-labelledby="error-title">
+        <div class="hero-content">
+            <h1 id="error-title" class="hero-title" data-i18n="error.title">404 — Nem található</h1>
+            <h2 id="error-subtitle" class="hero-subtitle" data-i18n="error.subtitle">Az oldalt nem találtuk</h2>
+            <p id="error-description" class="hero-description" data-i18n="error.description">A keresett oldal nem létezik, vagy áthelyezték. Lehetséges, hogy elgépelés történt a címben.</p>
+            <div class="hero-buttons">
+                <a href="/index.html" class="btn btn-primary" data-i18n="error.btnHome">Vissza a főoldalra</a>
+                <a href="mailto:contact@deakteri.club" class="btn btn-secondary" data-i18n="error.btnContact">Kapcsolat</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="code-animation">
+                <div class="code-line">&lt;!-- 404 --&gt;</div>
+                <div class="code-line">&lt;section class="not-found"&gt;</div>
+                <div class="code-line">  &lt;h1&gt;404&lt;/h1&gt;</div>
+                <div class="code-line">  &lt;p&gt;Ilyen oldal nincs&lt;/p&gt;</div>
+                <div class="code-line">&lt;/section&gt;</div>
+            </div>
+        </div>
+    </main>
+
+    <section class="section">
+        <div class="container">
+            <h3 data-i18n="error.tipsTitle">Gyors tippek</h3>
+            <ul id="error-tips" class="feature-grid" aria-label="Tips list">
+            </ul>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Deák Téri Hack Club</h3>
+                    <p>Evangélikus Gimnázium</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:contact@deakteri.club">Kapcsolat</a>
+                    <a href="/index.html">Rólunk</a>
+                    <a href="/index.html#donate">Támogatás</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Deák Téri Evangélikus Gimnázium Hack Club. Minden jog fenntartva.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

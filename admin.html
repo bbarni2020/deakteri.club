@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Deáktéri Hack Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #b0b0b0;
+        }
+
+        .login-section {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: #b0b0b0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            color: #4ecdc4;
+            border-bottom-color: #4ecdc4;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .data-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .data-info {
+            flex: 1;
+        }
+
+        .data-info h4 {
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .data-info p {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .data-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #b0b0b0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .data-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .data-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .logout-btn {
+                position: static;
+                margin: 1rem auto;
+                display: block;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-section" id="loginSection">
+            <div class="header">
+                <h1>🔐 Admin Panel</h1>
+                <p>Deáktéri Hack Club Management</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Admin jelszó:</label>
+                <input type="password" id="password" placeholder="Add meg a jelszót">
+            </div>
+            <button class="btn btn-primary" onclick="login()">Belépés</button>
+            
+            <div id="loginError" style="display: none;" class="alert alert-error">
+                Hibás jelszó!
+            </div>
+        </div>
+
+        <div class="admin-section" id="adminSection">
+            <div class="header">
+                <h1>📊 Admin Panel</h1>
+                <p>Szponzorok és támogatók kezelése</p>
+                <button class="btn btn-secondary logout-btn" onclick="logout()">Kijelentkezés</button>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('sponsors')">Szponzorok</button>
+                <button class="tab" onclick="switchTab('donators')">Támogatók</button>
+                <button class="tab" onclick="switchTab('recurring')">Ismétlődő szponzorok</button>
+                <button class="tab" onclick="switchTab('invoices')">Egyszeri számlázási kérelmek</button>
+            </div>
+
+            <div class="tab-content active" id="sponsorsTab">
+                <h2>🌟 Szponzorok kezelése</h2>
+                
+                <form id="sponsorForm" style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Új szponzor hozzáadása</h3>
+                    
+                    <div class="form-group">
+                        <label for="sponsorName">Név *</label>
+                        <input type="text" id="sponsorName" required placeholder="pl. TechCorp Solutions">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorLogo">Logo URL *</label>
+                        <input type="url" id="sponsorLogo" required placeholder="https://example.com/logo.png">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorWebsite">Weboldal</label>
+                        <input type="url" id="sponsorWebsite" placeholder="https://example.com">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Szponzor hozzáadása</button>
+                </form>
+
+                <div id="sponsorsLoading" class="loading">Szponzorok betöltése...</div>
+                <div id="sponsorsGrid" class="data-grid"></div>
+            </div>
+
+            <div class="tab-content" id="donatorsTab">
+                <h2>Támogatók kezelése</h2>
+                
+                <form id="donatorForm" style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Új támogató hozzáadása</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donatorName">Név *</label>
+                            <input type="text" id="donatorName" required placeholder="pl. Kovács János">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="donatorAmount">Összeg (USD) *</label>
+                            <input type="number" id="donatorAmount" required min="1" placeholder="50">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donatorMessage">Üzenet</label>
+                        <input type="text" id="donatorMessage" placeholder="Szuper kezdeményezés!">
+                    </div>
+                    
+                    <div class="form-group" style="display: none;">
+                        <label for="donatorAnonymous">Anonimus</label>
+                        <select id="donatorAnonymous">
+                            <option value="false">Nem</option>
+                            <option value="true">Igen</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Támogató hozzáadása</button>
+                </form>
+
+                <div id="donatorsLoading" class="loading">Támogatók betöltése...</div>
+                <div id="donatorsGrid" class="data-grid"></div>
+            </div>
+
+            <div class="tab-content" id="recurringTab">
+                <h2>🔄 Ismétlődő szponzorok</h2>
+                <p style="color: #b0b0b0; margin-bottom: 2rem;">Itt kezelheted az ismétlődő szponzorálásokat. Jelöljétek meg a beérkezett fizetéseket és kövessétek nyomon a következő esedékességeket.</p>
+                
+                <div id="recurringLoading" class="loading">Ismétlődó szponzorok betöltése...</div>
+                <div id="recurringGrid" class="data-grid"></div>
+            </div>
+
+            <div class="tab-content" id="invoicesTab">
+                <h2>📄 Számlázási kérelmek</h2>
+                <p style="color: #b0b0b0; margin-bottom: 2rem;">Itt kezelheted az új beérkezett számlázási kérelmeket. Miután feldolgoztad egy kérelmet, jelöld késznek.</p>
+                
+                <div id="invoicesLoading" class="loading">Számlázási kérelmek betöltése...</div>
+                <div id="invoicesGrid" class="data-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://api.deakteri.club/api';
+        
+        let currentTab = 'sponsors';
+
+        function getAuthHeaders() {
+            const token = sessionStorage.getItem('adminToken');
+            if (!token) {
+                throw new Error('No authentication token found');
+            }
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+        }
+
+        function handleAuthError(error) {
+            if (error.message.includes('token') || error.message.includes('401') || error.message.includes('403')) {
+                showAlert('Munkamenet lejárt. Kérjük, jelentkezz be újra!', 'error');
+                logout();
+                return true;
+            }
+            return false;
+        }
+
+        async function fetchWithTimeout(url, options = {}, timeout = 10000) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeout);
+            
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                return response;
+            } catch (error) {
+                clearTimeout(timeoutId);
+                if (error.name === 'AbortError') {
+                    throw new Error('timeout');
+                }
+                throw error;
+            }
+        }
+
+        async function login() {
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            const loginBtn = document.querySelector('.login-section .btn');
+            
+            if (!password) {
+                errorDiv.textContent = 'Kérjük, add meg a jelszót!';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            loginBtn.textContent = 'Bejelentkezés...';
+            loginBtn.disabled = true;
+            
+            try {
+                const response = await fetchWithTimeout(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('adminSection').style.display = 'block';
+                    sessionStorage.setItem('adminAuth', 'true');
+                    sessionStorage.setItem('adminToken', result.token);
+                    loadData();
+                    errorDiv.style.display = 'none';
+                } else {
+                    errorDiv.textContent = result.error || 'Hibás jelszó!';
+                    errorDiv.style.display = 'block';
+                    document.getElementById('password').value = '';
+                }
+            } catch (error) {
+                console.error('Authentication error:', error);
+                
+                let errorMessage = 'Hiba a bejelentkezés során. Próbáld újra!';
+                
+                if (error.message === 'timeout') {
+                    errorMessage = 'Kapcsolat túllépte az időkorlátot. Próbáld újra!';
+                } else if (error.message.includes('cors') || error.message.includes('CORS') || 
+                          error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage = 'API szolgáltatás nem elérhető (CORS hiba). Ellenőrizd a szerver konfigurációt!';
+                } else if (error.message.includes('HTTP')) {
+                    errorMessage = `Szerver hiba: ${error.message}`;
+                }
+                
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.display = 'block';
+            } finally {
+                loginBtn.textContent = 'Belépés';
+                loginBtn.disabled = false;
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminAuth');
+            sessionStorage.removeItem('adminToken');
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        if (sessionStorage.getItem('adminAuth') === 'true' && sessionStorage.getItem('adminToken')) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('adminSection').style.display = 'block';
+            loadData();
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+        }
+
+        function showAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        async function loadData() {
+            await loadSponsors();
+            await loadDonators();
+            await loadRecurringSponsors();
+            await loadInvoiceSubmissions();
+        }
+
+        async function loadSponsors() {
+            const loading = document.getElementById('sponsorsLoading');
+            const grid = document.getElementById('sponsorsGrid');
+            
+            try {
+                loading.style.display = 'block';
+                const response = await fetchWithTimeout(`${API_BASE_URL}/sponsors`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displaySponsors(data.sponsors);
+                } else {
+                    throw new Error(data.error || 'Hiba a szponzorok betöltésekor');
+                }
+            } catch (error) {
+                console.error('Error loading sponsors:', error);
+                
+                let errorMessage = 'Hiba a szponzorok betöltésekor: ';
+                
+                if (error.message === 'timeout') {
+                    errorMessage += 'Kapcsolat túllépte az időkorlátot';
+                } else if (error.message.includes('cors') || error.message.includes('CORS') || 
+                          error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage += 'CORS hiba - API nem elérhető';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showAlert(errorMessage, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        async function loadDonators() {
+            const loading = document.getElementById('donatorsLoading');
+            const grid = document.getElementById('donatorsGrid');
+            
+            try {
+                loading.style.display = 'block';
+                const response = await fetchWithTimeout(`${API_BASE_URL}/donators`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayDonators(data.donators);
+                } else {
+                    throw new Error(data.error || 'Hiba a támogatók betöltésekor');
+                }
+            } catch (error) {
+                console.error('Error loading donators:', error);
+                
+                let errorMessage = 'Hiba a támogatók betöltésekor: ';
+                
+                if (error.message === 'timeout') {
+                    errorMessage += 'Kapcsolat túllépte az időkorlátot';
+                } else if (error.message.includes('cors') || error.message.includes('CORS') || 
+                          error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage += 'CORS hiba - API nem elérhető';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showAlert(errorMessage, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displaySponsors(sponsors) {
+            const grid = document.getElementById('sponsorsGrid');
+            grid.innerHTML = '';
+            
+            sponsors.forEach(sponsor => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${sponsor.name}</h4>
+                        <p>Logo: ${sponsor.logo_url}</p>
+                        <p>Weboldal: ${sponsor.website || 'Nincs megadva'}</p>
+                        <p>Hozzáadva: ${new Date(sponsor.added_date).toLocaleDateString('hu-HU')}</p>
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn btn-danger" onclick="deleteSponsor(${sponsor.id}, '${sponsor.name}')">
+                            Törlés
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function displayDonators(donators) {
+            const grid = document.getElementById('donatorsGrid');
+            grid.innerHTML = '';
+            
+            donators.forEach(donator => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${donator.name}</h4>
+                        <p>Összeg: $${donator.amount} ${donator.currency}</p>
+                        <p>Üzenet: ${donator.message || 'Nincs üzenet'}</p>
+                        <p>Anonimus: ${donator.anonymous ? 'Igen' : 'Nem'}</p>
+                        <p>Hozzáadva: ${new Date(donator.added_date).toLocaleDateString('hu-HU')}</p>
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn btn-danger" onclick="deleteDonator(${donator.id}, '${donator.name}')">
+                            Törlés
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        async function loadInvoiceSubmissions() {
+            const loading = document.getElementById('invoicesLoading');
+            const grid = document.getElementById('invoicesGrid');
+            
+            try {
+                loading.style.display = 'block';
+                const response = await fetchWithTimeout(`${API_BASE_URL}/invoice-submissions`, {
+                    headers: getAuthHeaders()
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayInvoiceSubmissions(data.submissions);
+                } else {
+                    throw new Error(data.error || 'Hiba a számlázási kérelmek betöltésekor');
+                }
+            } catch (error) {
+                console.error('Error loading invoice submissions:', error);
+                
+                let errorMessage = 'Hiba a számlázási kérelmek betöltésekor: ';
+                
+                if (error.message === 'timeout') {
+                    errorMessage += 'Kapcsolat túllépte az időkorlátot';
+                } else if (error.message.includes('cors') || error.message.includes('CORS') || 
+                          error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage += 'CORS hiba - API nem elérhető';
+                } else if (!handleAuthError(error)) {
+                    errorMessage += error.message;
+                } else {
+                    return;
+                }
+                
+                showAlert(errorMessage, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayInvoiceSubmissions(submissions) {
+            const grid = document.getElementById('invoicesGrid');
+            grid.innerHTML = '';
+            
+            if (submissions.length === 0) {
+                grid.innerHTML = '<p style="color: #b0b0b0; text-align: center; padding: 2rem;">Nincs függőben lévő számlázási kérelem.</p>';
+                return;
+            }
+            
+            submissions.forEach(submission => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${submission.companyName}</h4>
+                        <p><strong>Kapcsolattartó:</strong> ${submission.contactEmail}</p>
+                        <p><strong>Összeg:</strong> $${submission.amount} USD</p>
+                        <div style="margin: 0.5rem 0;">
+                            <strong>Számlázási cím:</strong><br>
+                            <span style="color: #e0e0e0; line-height: 1.4;">
+                                ${submission.streetAddress}<br>
+                                ${submission.suite ? `${submission.suite}<br>` : ''}
+                                ${submission.city}, ${submission.state ? `${submission.state} ` : ''}${submission.zip}<br>
+                                ${submission.country}
+                            </span>
+                        </div>
+                        <p><strong>Email elküldve:</strong> ${submission.email_sent ? '✅ Igen' : '❌ Nem'}</p>
+                        <p><strong>Beérkezett:</strong> ${new Date(submission.timestamp).toLocaleString('hu-HU')}</p>
+                    </div>
+                    <div class="data-actions">
+                        <button class="btn btn-primary" onclick="markInvoiceDone(${submission.id}, '${submission.companyName}')" style="margin-right: 0.5rem;">
+                            ✅ Kész
+                        </button>
+                        <button class="btn btn-secondary" onclick="copyInvoiceDetails(${JSON.stringify(submission).replace(/"/g, '&quot;')})">
+                            📋 Másolás
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        document.getElementById('sponsorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Hozzáadás...';
+            submitBtn.disabled = true;
+            
+            try {
+                const data = {
+                    name: document.getElementById('sponsorName').value,
+                    logo_url: document.getElementById('sponsorLogo').value,
+                    website: document.getElementById('sponsorWebsite').value
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/sponsors`, {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Szponzor sikeresen hozzáadva!');
+                    this.reset();
+                    await loadSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error adding sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a szponzor hozzáadásakor: ' + error.message, 'error');
+                }
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        document.getElementById('donatorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Hozzáadás...';
+            submitBtn.disabled = true;
+            
+            try {
+                const data = {
+                    name: document.getElementById('donatorName').value,
+                    amount: parseInt(document.getElementById('donatorAmount').value),
+                    message: document.getElementById('donatorMessage').value,
+                    anonymous: document.getElementById('donatorAnonymous').value === 'true'
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/donators`, {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Támogató sikeresen hozzáadva!');
+                    this.reset();
+                    await loadDonators();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error adding donator:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a támogató hozzáadásakor: ' + error.message, 'error');
+                }
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        async function deleteSponsor(id, name) {
+            if (!confirm(`Biztosan törölni szeretnéd a következő szponzort: ${name}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/sponsors/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Szponzor sikeresen törölve!');
+                    await loadSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error deleting sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a szponzor törlésekor: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function deleteDonator(id, name) {
+            if (!confirm(`Biztosan törölni szeretnéd a következő támogatót: ${name}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/donators/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Támogató sikeresen törölve!');
+                    await loadDonators();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error deleting donator:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a támogató törlésekor: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function markInvoiceDone(id, companyName) {
+            if (!confirm(`Biztosan kész a számlázási kérelem: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/invoice-submissions/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Számlázási kérelem sikeresen készre jelölve!');
+                    await loadInvoiceSubmissions();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error marking invoice as done:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a kérelem készre jelölésekor: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function copyInvoiceDetails(submission) {
+            const details = `Számlázási kérelem részletei:
+            
+Cégnév: ${submission.companyName}
+Kapcsolattartó: ${submission.contactEmail}
+Összeg: $${submission.amount} USD
+
+Számlázási cím:
+${submission.streetAddress}${submission.suite ? `\n${submission.suite}` : ''}
+${submission.city}, ${submission.state ? `${submission.state} ` : ''}${submission.zip}
+${submission.country}
+
+Beérkezett: ${new Date(submission.timestamp).toLocaleString('hu-HU')}
+Email elküldve: ${submission.email_sent ? 'Igen' : 'Nem'}`;
+
+            navigator.clipboard.writeText(details).then(() => {
+                showAlert('Számlázási adatok vágólapra másolva!');
+            }).catch(err => {
+                console.error('Error copying to clipboard:', err);
+                showAlert('Hiba a másolás során', 'error');
+            });
+        }
+
+        async function loadRecurringSponsors() {
+            const loading = document.getElementById('recurringLoading');
+            const grid = document.getElementById('recurringGrid');
+            
+            try {
+                loading.style.display = 'block';
+                const response = await fetchWithTimeout(`${API_BASE_URL}/recurring-sponsors`, {
+                    headers: getAuthHeaders()
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayRecurringSponsors(data.recurring_sponsors);
+                } else {
+                    throw new Error(data.error || 'Hiba az ismétlődő szponzorok betöltésekor');
+                }
+            } catch (error) {
+                console.error('Error loading recurring sponsors:', error);
+                
+                let errorMessage = 'Hiba az ismétlődő szponzorok betöltésekor: ';
+                
+                if (error.message === 'timeout') {
+                    errorMessage += 'Kapcsolat túllépte az időkorlátot';
+                } else if (error.message.includes('cors') || error.message.includes('CORS') || 
+                          error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage += 'CORS hiba - API nem elérhető';
+                } else if (!handleAuthError(error)) {
+                    errorMessage += error.message;
+                } else {
+                    return;
+                }
+                
+                showAlert(errorMessage, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayRecurringSponsors(recurringSponsors) {
+            const grid = document.getElementById('recurringGrid');
+            grid.innerHTML = '';
+            
+            if (recurringSponsors.length === 0) {
+                grid.innerHTML = '<p style="color: #b0b0b0; text-align: center; padding: 2rem;">Nincs ismétlődő szponzor.</p>';
+                return;
+            }
+            
+            recurringSponsors.sort((a, b) => {
+                if (a.status === 'pending' && b.status !== 'pending') return -1;
+                if (a.status !== 'pending' && b.status === 'pending') return 1;
+                if (a.next_due_date && b.next_due_date) {
+                    return new Date(a.next_due_date) - new Date(b.next_due_date);
+                }
+                return 0;
+            });
+            
+            recurringSponsors.forEach(sponsor => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                
+                const statusColor = {
+                    'pending': '#f59e0b',
+                    'active': '#10b981',
+                    'paused': '#6b7280',
+                    'cancelled': '#ef4444'
+                }[sponsor.status] || '#6b7280';
+                
+                const statusText = {
+                    'pending': 'Függőben',
+                    'active': 'Aktív',
+                    'paused': 'Szüneteltetve',
+                    'cancelled': 'Megszakítva'
+                }[sponsor.status] || sponsor.status;
+                
+                const frequencyText = {
+                    'weekly': 'hetente',
+                    'monthly': 'havonta',
+                    'quarterly': 'negyedévente',
+                    'yearly': 'évente'
+                }[sponsor.frequency] || sponsor.frequency;
+                
+                const nextDueDate = sponsor.next_due_date ? new Date(sponsor.next_due_date).toLocaleDateString('hu-HU') : 'Nincs beállítva';
+                const isOverdue = sponsor.next_due_date && new Date(sponsor.next_due_date) <= new Date() && sponsor.status === 'active';
+                
+                item.innerHTML = `
+                    <div class="data-info">
+                        <h4>${sponsor.companyName} ${isOverdue ? '🔴' : ''}</h4>
+                        <p><strong>Kapcsolattartó:</strong> ${sponsor.contactEmail}</p>
+                        <p><strong>Összeg:</strong> $${sponsor.amount} USD</p>
+                        <p><strong>Gyakoriság:</strong> ${frequencyText}</p>
+                        <p><strong>Státusz:</strong> <span style="color: ${statusColor}; font-weight: bold;">${statusText}</span></p>
+                        <p><strong>Következő esedékesség:</strong> ${nextDueDate} ${isOverdue ? '(lejárt!)' : ''}</p>
+                        <p><strong>Összes fizetés:</strong> ${sponsor.total_payments || 0}</p>
+                        ${sponsor.last_payment_date ? `<p><strong>Utolsó fizetés:</strong> ${new Date(sponsor.last_payment_date).toLocaleDateString('hu-HU')}</p>` : ''}
+                    </div>
+                    <div class="data-actions">
+                        ${sponsor.status === 'pending' ? `
+                            <button class="btn btn-primary" onclick="activateRecurringSponsor(${sponsor.id}, '${sponsor.companyName}')" style="margin-right: 0.5rem;">
+                                ✅ Aktiválás
+                            </button>
+                        ` : ''}
+                        ${sponsor.status === 'active' ? `
+                            <button class="btn btn-primary" onclick="recordPayment(${sponsor.id}, '${sponsor.companyName}')" style="margin-right: 0.5rem;">
+                                💰 Fizetés rögzítése
+                            </button>
+                            <button class="btn btn-secondary" onclick="pauseRecurringSponsor(${sponsor.id}, '${sponsor.companyName}')" style="margin-right: 0.5rem;">
+                                ⏸️ Szüneteltetés
+                            </button>
+                        ` : ''}
+                        ${sponsor.status === 'paused' ? `
+                            <button class="btn btn-primary" onclick="resumeRecurringSponsor(${sponsor.id}, '${sponsor.companyName}')" style="margin-right: 0.5rem;">
+                                ▶️ Folytatás
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-danger" onclick="deleteRecurringSponsor(${sponsor.id}, '${sponsor.companyName}')">
+                            🗑️ Törlés
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        async function activateRecurringSponsor(id, companyName) {
+            if (!confirm(`Biztosan aktiválni szeretnéd az ismétlődő szponzorálást: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/recurring-sponsors/${id}/activate`, {
+                    method: 'POST',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Ismétlődő szponzor sikeresen aktiválva!');
+                    await loadRecurringSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error activating recurring sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba az aktiválás során: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function recordPayment(id, companyName) {
+            if (!confirm(`Fizetés rögzítése a következő szponzorhoz: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/recurring-sponsors/${id}/payment`, {
+                    method: 'POST',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Fizetés sikeresen rögzítve!');
+                    await loadRecurringSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error recording payment:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a fizetés rögzítése során: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function pauseRecurringSponsor(id, companyName) {
+            if (!confirm(`Biztosan szüneteltetni szeretnéd az ismétlődő szponzorálást: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/recurring-sponsors/${id}/status`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ status: 'paused' })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Ismétlődő szponzor sikeresen szüneteltetve!');
+                    await loadRecurringSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error pausing recurring sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a szüneteltetés során: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function resumeRecurringSponsor(id, companyName) {
+            if (!confirm(`Biztosan folytatni szeretnéd az ismétlődő szponzorálást: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/recurring-sponsors/${id}/status`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ status: 'active' })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Ismétlődő szponzor sikeresen folytatva!');
+                    await loadRecurringSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error resuming recurring sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a folytatás során: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function deleteRecurringSponsor(id, companyName) {
+            if (!confirm(`Biztosan törölni szeretnéd az ismétlődő szponzorálást: ${companyName}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/recurring-sponsors/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Ismétlődő szponzor sikeresen törölve!');
+                    await loadRecurringSponsors();
+                } else {
+                    throw new Error(result.error || 'Ismeretlen hiba');
+                }
+            } catch (error) {
+                console.error('Error deleting recurring sponsor:', error);
+                if (!handleAuthError(error)) {
+                    showAlert('Hiba a törlés során: ' + error.message, 'error');
+                }
+            }
+        }
+
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
