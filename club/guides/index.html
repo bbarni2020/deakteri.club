@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HC Guides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+        document.documentElement.setAttribute('data-initial-lang', savedLang);
+    </script>
+</head>
+<body>
+    <div class="lang-toggle-container">
+        <div class="lang-bg"></div>
+        <div class="lang-option" id="lang-en" onclick="setLanguage('en')">
+            <span class="flag-icon">🇺🇸</span>
+        </div>
+        <div class="lang-option" id="lang-hu" onclick="setLanguage('hu')">
+            <span class="flag-icon">🇭🇺</span>
+        </div>
+    </div>
+
+    <section class="welcome-screen">
+        <h1 class="glassy-text" data-i18n="website-title">Welcome to the Deak Teri HC Guides</h1>
+        <i id="scroll-arrow" class="fa-solid fa-chevron-down scroll-indicator" role="button" tabindex="0"></i>
+    </section>
+
+    <main class="hero">
+        <div class="tile-grid">
+            <a href="guides/hack-club.html" class="tile">
+                <div class="tile-header">
+                    <h2>Hack Club</h2>
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <p class="tile-description" data-i18n="hack-club-intro">Description for Hack Club goes here.</p>
+            </a>
+            <a href="guides/slack.html" class="tile">
+                <div class="tile-header">
+                    <h2>Slack</h2>
+                    <i class="fa-brands fa-slack"></i>
+                </div>
+                <p class="tile-description" data-i18n="slack-intro">Description for Slack goes here.</p>
+            </a>
+            <a href="guides/hc-identity.html" class="tile">
+                <div class="tile-header">
+                    <h2>HC Identity</h2>
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <p class="tile-description" data-i18n="hc-identity-intro">Description for HC Identity goes here.</p>
+            </a>
+            <a href="guides/hackatime.html" class="tile">
+                <div class="tile-header">
+                    <h2>Hackatime</h2>
+                    <i class="fa-solid fa-stopwatch"></i>
+                </div>
+                <p class="tile-description" data-i18n="hackatime-intro">Description for Hackatime goes here.</p>
+            </a>
+            <a href="guides/github-education.html" class="tile">
+                <div class="tile-header">
+                    <h2>Github Education</h2>
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <p class="tile-description" data-i18n="github-education-intro">Description for Github Education goes here.</p>
+            </a>
+            <a href="guides/other-resources.html" class="tile">
+                <div class="tile-header">
+                    <h2 data-i18n="other-resources-title">Other Resources</h2>
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <p class="tile-description" data-i18n="other-resources-intro">Description for Other Resources goes here.</p>
+            </a>
+        </div>
+    </main>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

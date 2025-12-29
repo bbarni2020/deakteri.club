@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hack Club - HC Guides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/guides.css">
+    <script>
+        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+        document.documentElement.setAttribute('data-initial-lang', savedLang);
+    </script>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <a href="../" class="logo">HC Guides</a>
+        </div>
+        <div class="lang-toggle-container">
+            <div class="lang-bg"></div>
+            <div class="lang-option" id="lang-en" onclick="setLanguage('en')">
+                <span class="flag-icon">🇺🇸</span>
+            </div>
+            <div class="lang-option" id="lang-hu" onclick="setLanguage('hu')">
+                <span class="flag-icon">🇭🇺</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="guide-container">
+        <nav class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="hack-club.html" class="active">Hack Club</a></li>
+                <li><a href="slack.html">Slack</a></li>
+                <li><a href="hc-identity.html">HC Identity</a></li>
+                <li><a href="hackatime.html">Hackatime</a></li>
+                <li><a href="github-education.html">Github Education</a></li>
+                <li><a href="other-resources.html">Other Resources</a></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <h1>Hack Club</h1>
+            <p>Welcome to the Hack Club guide. Here you will find everything you need to know about our organization.</p>
+        </main>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

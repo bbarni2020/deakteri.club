@@ -1,0 +1,137 @@
+body {
+    background-image: none;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--color-strong);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.guide-container {
+    display: flex;
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: white;
+    border-right: 1px solid #e0e0e0;
+    padding: 2rem 1rem;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #555;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+    color: var(--color-strong);
+}
+
+.sidebar a.active {
+    background-color: var(--color-light);
+    color: var(--color-strong);
+    font-weight: 700;
+}
+
+.content {
+    flex: 1;
+    padding: 3rem 4rem;
+    background-color: white;
+    max-width: 900px;
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-strong);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #444;
+}
+
+.lang-toggle-container {
+    position: static;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-left: auto;
+}
+
+.lang-bg {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .guide-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 1rem;
+    }
+
+    .content {
+        padding: 2rem 1rem;
+    }
+    
+    header {
+        padding: 1rem;
+    }
+}
