@@ -1,2 +1,3 @@
-# deakteri-club
-Deaktéri Hack Club weboldala
+# deakteri.club
+
+Just the static assets for the site.
