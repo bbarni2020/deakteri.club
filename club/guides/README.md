@@ -1,1 +1,0 @@
-A collection of guides for my local Hack Club.
