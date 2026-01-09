@@ -6,12 +6,14 @@
     <title>HC Guides</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/flag-animation.css">
     <script>
         const savedLang = localStorage.getItem('preferredLanguage') || 'en';
         document.documentElement.setAttribute('data-initial-lang', savedLang);
     </script>
 </head>
 <body>
+    <a href="https://hackclub.com/"><img class="orpheus-flag" style="position: absolute; top: 0; left: 20px; border: 0; width: 200px; z-index: 999;" src="https://assets.hackclub.com/flag-orpheus-top.svg" alt="Hack Club"/></a>
     <div class="lang-toggle-container">
         <div class="lang-bg"></div>
         <div class="lang-option" id="lang-en" onclick="setLanguage('en')">
@@ -32,7 +34,7 @@
             <a href="/hack-club" class="tile">
                 <div class="tile-header">
                     <h2>Hack Club</h2>
-                    <i class="fa-solid fa-code"></i>
+                    <img src="/assets/hc-icon-white-transparent.svg" alt="Hack Club" style="height: 2.5rem; width: 2.5rem;">
                 </div>
                 <p class="tile-description" data-i18n="hack-club-intro">Description for Hack Club goes here.</p>
             </a>
@@ -46,7 +48,7 @@
             <a href="/hc-auth" class="tile">
                 <div class="tile-header">
                     <h2>HC Auth</h2>
-                    <i class="fa-solid fa-fingerprint"></i>
+                    <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <p class="tile-description" data-i18n="hc-auth-intro">Description for HC Auth goes here.</p>
             </a>
